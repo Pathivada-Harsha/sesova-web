@@ -1,5 +1,5 @@
 import React from 'react';
-import sectionBackground from '../../images/sesova-ecosystem-section-background.png';
+import sectionBackground from '../../images/sesova-ecosystem-section-background.webp';
 
 // Section 02 — "Why SeSova": disconnected tools on the left, the SeSova
 // ecosystem on the right, then a strip of platform values.
@@ -255,7 +255,7 @@ export default function Ecosystem() {
               </svg>
               <div className="ws-pos" style={{ left: "50%", top: "50%" }}>
                 <div className="ws-core" style={{ margin: "0 auto" }}>
-                  <img src="/assets/logo.png" alt="SeSova logo" />
+                  <img src="/assets/logo.webp" alt="SeSova logo" />
                 </div>
                 <div className="ws-core-w" style={{ marginTop: "2cqw" }}>
                   Se<span style={{ color: "#4E9E6A" }}>S</span>ova

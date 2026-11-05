@@ -2,7 +2,7 @@ import React from 'react';
 import SmartLink from '../../components/SmartLink';
 import { useDemoModal } from '../../components/DemoModal';
 import useReveal from '../../hooks/useReveal';
-import workflowVisual from '../../images/product-workflow-visual.png';
+import workflowVisual from '../../images/product-workflow-visual.webp';
 
 // Section 06 — Solutions: the five-stage product workflow and the four positions
 // it serves on the left, the connected SESOVA product visual on the right.

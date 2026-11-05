@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import SmartLink from '../../components/SmartLink';
 import { useDemoModal } from '../../components/DemoModal';
-import architectureBackground from '../../images/operating-architecture-bg.png';
+import architectureBackground from '../../images/operating-architecture-bg.webp';
 
 // Section 05 — "The operating architecture": nine stage tabs over one content
 // card. Stage data and state (active stage, auto-advance while visible, pinning

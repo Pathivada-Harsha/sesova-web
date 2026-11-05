@@ -3,7 +3,7 @@ import SmartLink from './SmartLink';
 import { useDemoModal } from './DemoModal';
 
 // "Sign In" opens the SESOVA CRM in a new tab, keeping the website open.
-const SIGN_IN_URL = 'https://crm.sesolaenergy.com';
+const SIGN_IN_URL = 'http://app.sesova.in';
 
 // Generated from the SeSova design export; values come from the page hook via `v`.
 export default function Header({ v }) {
@@ -12,7 +12,7 @@ export default function Header({ v }) {
     <header style={{ position: "sticky", top: "0", zIndex: "60", padding: "14px 0 0", transition: "transform .5s cubic-bezier(.4,0,.2,1)", transform: v.headerT }}>
       <div className="nbar">
         <SmartLink href="/" className="nbrand" style={{ display: "flex", alignItems: "center", gap: "12px", flex: "none" }}>
-          <img className="nlogo" src="/assets/logo.png" alt="SeSova" style={{ objectFit: "contain", display: "block" }} />
+          <img className="nlogo" src="/assets/logo.webp" alt="SeSova" style={{ objectFit: "contain", display: "block" }} />
           <span style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             <span className="nword" style={{ fontWeight: "600", letterSpacing: "-.01em", lineHeight: "1", color: "#12324F" }}>
               Se

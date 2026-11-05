@@ -1,5 +1,6 @@
 import React from 'react';
-import connectedImage from '../../images/section-03-renewable-energy-city.png';
+import connectedImage from '../../images/section-03-renewable-energy-city.webp';
+import useScrollZoom from '../../hooks/useScrollZoom';
 
 // Section 03 — "The challenge": five separate systems on the left run through
 // SeSova in the centre to four connected results on the right. White canvas;
@@ -15,7 +16,7 @@ section.fx{position:relative;padding:92px 0;background:#FFFFFF}
 .fx-p{margin:16px 0 0;max-width:600px;font-size:clamp(13.5px,.98vw,15.5px);line-height:1.62;color:#607789}
 /* The image borrows space from the section's top padding and the row gap below,
    so it can be taller than the header text without pushing the cards down much. */
-.fx-img{position:relative;grid-area:img;align-self:stretch;margin:-76px 0 -20px;min-height:420px}
+.fx-img{position:relative;grid-area:img;align-self:stretch;margin:-76px 0 -20px;min-height:420px;overflow:hidden}
 .fx-img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:right center}
 .fx-left,.fx-right{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .fx-left{grid-area:left;grid-template-rows:repeat(5,1fr)}
@@ -105,6 +106,9 @@ const leftY = SYSTEMS.map((_, i) => ((i + 0.5) / SYSTEMS.length) * 100);
 const rightY = RESULTS.map((_, i) => ((i + 0.5) / RESULTS.length) * 100);
 
 export default function Fragmented() {
+  // Scroll-scrubbed zoom reveal on the city image (see useScrollZoom).
+  const zoom = useScrollZoom();
+
   return (
     <section className="fx" aria-labelledby="fx-title">
       <style>{CSS}</style>
@@ -123,7 +127,7 @@ export default function Fragmented() {
           </p>
         </header>
 
-        <figure className="fx-img" data-rise="">
+        <figure className="fx-img" data-rise="" ref={zoom}>
           <img src={connectedImage} alt="Connected technology ecosystem and modern business infrastructure" />
         </figure>
 
@@ -157,7 +161,7 @@ export default function Fragmented() {
             <span key={'dr' + i} className="fx-dot" style={{ left: "94%", top: y + "%", background: "#4E9E6A" }} />
           ))}
           <div className="fx-core">
-            <span className="fx-hex"><img src="/assets/logo.png" alt="" /></span>
+            <span className="fx-hex"><img src="/assets/logo.webp" alt="" /></span>
             <div className="fx-cw">Se<span style={{ color: "#4E9E6A" }}>S</span>ova</div>
             <div className="fx-cl">ONE RECORD</div>
           </div>

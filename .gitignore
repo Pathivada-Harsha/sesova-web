@@ -8,3 +8,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .DS_Store
+
+# Screenshots from scripts/shoot.js (visual checks, not source)
+.shots
+.shots-*

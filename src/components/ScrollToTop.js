@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { scrollTo } from '../lib/smoothScroll';
 
 // Scrolls to the hash target (20px above it) or to the top on navigation.
-// Same-page anchors glide; switching pages jumps instantly.
+// Same-page anchors glide through Lenis; switching pages jumps instantly.
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
   const prevPath = useRef(pathname);
@@ -10,16 +11,12 @@ export default function ScrollToTop() {
   useEffect(() => {
     const samePage = prevPath.current === pathname;
     prevPath.current = pathname;
-    const root = document.documentElement;
     const el = hash ? document.getElementById(hash.slice(1)) : null;
-    const top = el ? el.getBoundingClientRect().top + window.scrollY - 20 : 0;
     if (samePage && el) {
-      window.scrollTo({ top, behavior: 'smooth' });
+      scrollTo(el, { offset: -20 });
       return;
     }
-    root.style.scrollBehavior = 'auto';
-    window.scrollTo(0, top);
-    root.style.scrollBehavior = '';
+    scrollTo(el || 0, { offset: el ? -20 : 0, immediate: true });
   }, [pathname, hash]);
 
   return null;

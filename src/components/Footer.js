@@ -11,7 +11,7 @@ export default function Footer({ v }) {
         <div className="fgrid" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "44px" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "11px" }}>
-              <img src="/assets/logo.png" alt="SeSova" style={{ width: "27px", height: "31px", objectFit: "contain", display: "block" }} />
+              <img src="/assets/logo.webp" alt="SeSova" style={{ width: "27px", height: "31px", objectFit: "contain", display: "block" }} />
               <span style={{ fontSize: "18px", fontWeight: "600", color: "#fff" }}>
                 Se
                 <span style={{ color: "#86C79A" }}>S</span>

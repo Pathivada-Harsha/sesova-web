@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import SmartLink from '../../components/SmartLink';
 import { useDemoModal } from '../../components/DemoModal';
-import heroBackground from '../../images/sesova-tech-ecosystem-hero-background.png';
+import heroBackground from '../../images/sesova-tech-ecosystem-hero-background.webp';
+import LazyAccent3D from '../../three/LazyAccent3D';
+import useScrollZoom from '../../hooks/useScrollZoom';
+
+// Loaded as its own chunk; three.js never reaches the main bundle.
+const HeroDots = lazy(() => import('../../three/scenes/DriftingDots'));
 
 // Hero: "One Ecosystem. Multiple Digital Solutions." on the left, SeSova at the
 // centre of its six digital services on the right, over the technology-city
@@ -10,6 +15,7 @@ import heroBackground from '../../images/sesova-tech-ecosystem-hero-background.p
 const HERO_CSS = `
 section.hx{position:relative;margin-top:-74px;min-height:max(648px,100vh);overflow:hidden;padding:0!important;background:#F6FAFA}
 .hx-bgimg{position:absolute;inset:0;pointer-events:none;background-size:cover;background-position:right bottom;background-repeat:no-repeat}
+.hx-3d{position:absolute;inset:0;pointer-events:none}
 .hx-wash{position:absolute;inset:0;pointer-events:none;background:
   linear-gradient(180deg,rgba(252,251,248,0) 84%,#FCFBF8 100%),
   radial-gradient(ellipse 40% 56% at 76% 36%,rgba(246,250,250,.86) 0%,rgba(246,250,250,.72) 50%,rgba(246,250,250,0) 100%),
@@ -251,6 +257,8 @@ const DOTS = [
 const pct = (n) => (n / 620) * 100 + '%';
 
 export default function Hero() {
+  // Background creeps closer as the hero scrolls away.
+  const bgZoom = useScrollZoom({ from: 1, to: 1.14, start: 'top top', end: 'bottom top' });
   const openDemo = useDemoModal();
   return (
     <section className="hx" aria-labelledby="hero-title">
@@ -274,8 +282,10 @@ export default function Hero() {
       </svg>
 
       {/* Background: technology-city environment, washed toward the copy */}
-      <div className="hx-bgimg" style={{ backgroundImage: `url(${heroBackground})` }} aria-hidden="true" />
+      <div className="hx-bgimg" ref={bgZoom} style={{ backgroundImage: `url(${heroBackground})` }} aria-hidden="true" />
       <div className="hx-wash" aria-hidden="true" />
+      {/* Drifting 3D dot field, echoing the breathing dots in the diagram. */}
+      <LazyAccent3D scene={HeroDots} className="hx-3d" />
 
       <div className="hx-in">
         {/* Left: message */}
@@ -354,7 +364,7 @@ export default function Hero() {
             {/* Logo sits exactly on the centre point; the name sits beneath it. */}
             <div className="hx-pos" style={{ left: pct(C.x), top: pct(C.y) }}>
               <div className="hx-core" data-float="">
-                <img src="/assets/logo.png" alt="SeSova logo" />
+                <img src="/assets/logo.webp" alt="SeSova logo" />
               </div>
             </div>
             <div className="hx-pos" style={{ left: pct(C.x), top: pct(C.y + 82) }}>

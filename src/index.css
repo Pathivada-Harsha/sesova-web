@@ -112,7 +112,9 @@
 *{box-sizing:border-box}
 /* Widest the page content (and header bar) grows to on large screens. */
 :root{--page-max:1560px}
-html{scroll-behavior:smooth}
+/* Scroll behaviour is owned by Lenis (src/lib/smoothScroll.js); a native
+   smooth-scroll here fights it. Reduced-motion visitors get no Lenis and so
+   fall back to the browser default, which is what that setting wants. */
 body{margin:0;overflow-x:clip;background:#FCFBF8;color:#0C2434;font-family:Poppins,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
 a{color:#14707A;text-decoration:none}
 a:hover{color:#2C6FB5}
@@ -311,3 +313,7 @@ button,input,select,textarea{font-family:inherit}
 [data-tilt]{transition:transform .5s cubic-bezier(.16,.84,.3,1),box-shadow .5s ease}
 [data-tilt]:hover{transform:perspective(1200px) rotateX(1.6deg) rotateY(-2.4deg) translateY(-6px);box-shadow:0 26px 50px -24px rgba(12,36,52,.34)}
 [data-slide]{transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1),filter .8s ease}
+
+/* While the preloader curtain is up, hold the sections' entrance animations so
+   they play for the visitor instead of being spent behind it. */
+html.preloading [data-rise],html.preloading [data-blur],html.preloading [data-wipe],html.preloading [data-in],html.preloading [data-bar],html.preloading [data-draw],html.preloading .hx-dia{animation-play-state:paused!important}
