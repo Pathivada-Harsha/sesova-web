@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import productBackground from '../../images/product-section-background.png';
+import productBackground from '../../images/product-section-background.webp';
 
 // Product experience: six module tabs, per-module screen pills and one CSS laptop
 // that cross-fades between the real product screenshots in public/assets/product/.

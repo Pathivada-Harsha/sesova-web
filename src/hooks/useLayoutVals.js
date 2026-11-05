@@ -1,25 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NAV, FOOTER, TEAL } from '../data/content';
-
-// Eased 1.5s glide back to the top of the page.
-function smoothToTop(rafRef) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo(0, 0); return; }
-  const root = document.documentElement;
-  const prev = root.style.scrollBehavior;
-  root.style.scrollBehavior = 'auto';
-  const from = window.scrollY;
-  const t0 = performance.now();
-  const dur = 1500;
-  const ease = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-  const step = (now) => {
-    const p = Math.min(1, (now - t0) / dur);
-    window.scrollTo(0, Math.round(from * (1 - ease(p))));
-    if (p < 1) rafRef.current = requestAnimationFrame(step);
-    else root.style.scrollBehavior = prev;
-  };
-  rafRef.current = requestAnimationFrame(step);
-}
+import { scrollTo } from '../lib/smoothScroll';
 
 // Header, mobile menu, back-to-top button and footer values.
 export default function useLayoutVals() {
@@ -28,7 +10,6 @@ export default function useLayoutVals() {
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState('');
-  const glide = useRef(null);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--flow', '7s');
@@ -55,14 +36,11 @@ export default function useLayoutVals() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    const raf = glide;
-    return () => { if (raf.current) cancelAnimationFrame(raf.current); };
-  }, []);
-
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
-  const toTop = useCallback(() => smoothToTop(glide), []);
+  // Lenis owns the glide back to the top; it falls back to an instant jump for
+  // reduced-motion visitors, who have no Lenis instance.
+  const toTop = useCallback(() => scrollTo(0, { duration: 1.5 }), []);
 
   return {
     nav: NAV.map((n) => {
